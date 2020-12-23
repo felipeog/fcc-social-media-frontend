@@ -6,7 +6,6 @@ import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
 
 // import { LIKE_MUTATION } from './query'
-import console from 'console'
 
 dayjs.extend(relativeTime)
 
