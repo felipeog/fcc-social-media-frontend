@@ -1,25 +1,47 @@
-import React from 'react'
-import { Button, Form } from 'semantic-ui-react'
+import React, { useState } from 'react'
+import { Button, Form, Message } from 'semantic-ui-react'
 import { useMutation } from '@apollo/client'
 
 import { useForm } from '../../hooks/useForm'
-import { CREATE_POST_MUTATION } from './query'
+import { CREATE_POST_MUTATION, POSTS_QUERY } from './query'
 
 const PostForm = () => {
+  // state
+  const [errors, setErrors] = useState({})
+
+  // hooks
   const [createPost, { loading, error }] = useMutation(CREATE_POST_MUTATION, {
-    onCompleted: resetForm,
-    onError: (err) => console.error('PostForm @ createPost >>>>>', err),
+    update: (proxy, result) => {
+      const { getPosts: prevPosts } = proxy.readQuery({ query: POSTS_QUERY })
+      const newPost = result.data.createPost
+      const updatedPosts = [newPost, ...prevPosts]
+      const newData = { getPosts: updatedPosts }
+
+      proxy.writeQuery({ query: POSTS_QUERY, data: newData })
+
+      resetForm()
+    },
+    onError: (err) => {
+      setErrors(err.graphQLErrors[0].extensions?.errors || {})
+    },
   })
   const { values, handleFormSubmit, handleInputChange, resetForm } = useForm({
     callback: () => createPost({ variables: { ...values } }),
     initialState: { body: '' },
   })
 
+  // rendering
+  const renderErrors = () => {
+    const hasErrors = Object.keys(errors || {}).length > 0
+
+    if (hasErrors) return <Message error list={Object.values(errors)} />
+  }
+
   return (
     <div className="PostForm">
       <h2>Create a post</h2>
 
-      <Form onSubmit={handleFormSubmit}>
+      <Form loading={loading} onSubmit={handleFormSubmit}>
         <Form.Field>
           <Form.Input
             name="body"
@@ -32,6 +54,8 @@ const PostForm = () => {
           </Button>
         </Form.Field>
       </Form>
+
+      {renderErrors()}
     </div>
   )
 }

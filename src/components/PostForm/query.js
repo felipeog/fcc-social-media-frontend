@@ -25,3 +25,29 @@ export const CREATE_POST_MUTATION = gql`
     }
   }
 `
+
+export const POSTS_QUERY = gql`
+  query postForm_postsQuery {
+    getPosts {
+      body
+      commentCount
+      createdAt
+      id
+      likeCount
+      username
+
+      likes {
+        createdAt
+        id
+        username
+      }
+
+      comments {
+        body
+        createdAt
+        id
+        username
+      }
+    }
+  }
+`
