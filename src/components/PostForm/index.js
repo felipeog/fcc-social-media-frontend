@@ -20,6 +20,7 @@ const PostForm = () => {
       proxy.writeQuery({ query: POSTS_QUERY, data: newData })
 
       resetForm()
+      setErrors({})
     },
     onError: (err) => {
       setErrors(err.graphQLErrors[0].extensions?.errors || {})
