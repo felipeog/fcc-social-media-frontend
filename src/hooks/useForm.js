@@ -19,9 +19,14 @@ export const useForm = ({ callback, initialState = {} }) => {
     callback()
   }
 
+  const resetForm = () => {
+    setValues(initialState)
+  }
+
   return {
     values,
     handleInputChange,
     handleFormSubmit,
+    resetForm,
   }
 }
