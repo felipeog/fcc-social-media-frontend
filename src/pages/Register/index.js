@@ -1,8 +1,9 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { Form, Button, Loader, Message } from 'semantic-ui-react'
 import { useMutation } from '@apollo/client'
 
 import { useForm } from '../../hooks/useForm'
+import { UserContext } from '../../context/User'
 import { REGISTER_MUTATION } from './query'
 
 const Register = ({ history }) => {
@@ -10,8 +11,12 @@ const Register = ({ history }) => {
   const [errors, setErrors] = useState({})
 
   // hooks
+  const userContext = useContext(UserContext)
   const [register, { loading }] = useMutation(REGISTER_MUTATION, {
-    onCompleted: () => history.push('/'),
+    onCompleted: ({ register: userData }) => {
+      userContext.login(userData)
+      history.push('/')
+    },
     onError: (err) => {
       setErrors(err.graphQLErrors[0].extensions?.errors || {})
     },
