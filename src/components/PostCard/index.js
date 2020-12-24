@@ -1,10 +1,11 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Card, Icon, Label, Button, Popup } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 // import { useMutation } from '@apollo/client'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
 
+import { UserContext } from '../../context/User'
 // import { LIKE_MUTATION } from './query'
 
 dayjs.extend(relativeTime)
@@ -21,6 +22,7 @@ const PostCard = ({
     username,
   },
 }) => {
+  const { user } = useContext(UserContext)
   // const [likePost, { loading }] = useMutation(LIKE_MUTATION, {
   //   variables: {
   //     postId: id,
@@ -30,6 +32,17 @@ const PostCard = ({
 
   const likePost = () => console.log('like')
   const commentPost = () => console.log('comment')
+
+  // rendering
+  const renderDeleteButton = () => {
+    if (user && user?.username === username) {
+      return (
+        <Button as="div" color="red">
+          <Icon name="trash" />
+        </Button>
+      )
+    }
+  }
 
   return (
     <Card className="PostCard" fluid>
@@ -57,20 +70,22 @@ const PostCard = ({
             <Icon name="heart" />
           </Button>
 
-          <Label as="a" basic color="teal" pointing="left">
+          <Label basic color="teal" pointing="left">
             {likeCount}
           </Label>
         </Button>
 
-        <Button as="div" labelPosition="right" onClick={commentPost}>
+        <Button as="div" labelPosition="right" as={Link} to={`/post/${id}`}>
           <Button basic color="blue">
             <Icon name="comments" />
           </Button>
 
-          <Label as="a" basic color="blue" pointing="left">
+          <Label basic color="blue" pointing="left">
             {commentCount}
           </Label>
         </Button>
+
+        {renderDeleteButton()}
       </Card.Content>
     </Card>
   )
