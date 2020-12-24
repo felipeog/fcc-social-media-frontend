@@ -1,7 +1,7 @@
 import React, { createContext, useReducer } from 'react'
 import jwtDecode from 'jwt-decode'
 
-const LS_KEY = 'fcc/jwt-token'
+import { LS_TOKEN_KEY } from '../../consts'
 
 const UserContext = createContext({
   user: null,
@@ -29,11 +29,11 @@ const userReducer = (state, action) => {
 }
 
 const getInitialState = () => {
-  if (localStorage.getItem(LS_KEY)) {
-    const decodedToken = jwtDecode(localStorage.getItem(LS_KEY))
+  if (localStorage.getItem(LS_TOKEN_KEY)) {
+    const decodedToken = jwtDecode(localStorage.getItem(LS_TOKEN_KEY))
 
     if (decodedToken.exp * 1_000 < Date.now()) {
-      localStorage.removeItem(LS_KEY)
+      localStorage.removeItem(LS_TOKEN_KEY)
 
       return {
         user: null,
@@ -55,7 +55,7 @@ const UserProvider = (props) => {
   const [state, dispatch] = useReducer(userReducer, initialState)
 
   const login = (userData) => {
-    localStorage.setItem(LS_KEY, userData.token)
+    localStorage.setItem(LS_TOKEN_KEY, userData.token)
 
     dispatch({
       type: 'LOGIN',
@@ -64,7 +64,7 @@ const UserProvider = (props) => {
   }
 
   const logout = () => {
-    localStorage.removeItem(LS_KEY)
+    localStorage.removeItem(LS_TOKEN_KEY)
 
     dispatch({
       type: 'LOGOUT',
