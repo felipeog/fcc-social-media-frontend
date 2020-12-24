@@ -6,10 +6,12 @@ import PostsList from '../../components/PostsList'
 import { POSTS_QUERY } from './query'
 
 const Home = () => {
+  // hooks
   const { data, loading, error } = useQuery(POSTS_QUERY, {
     onError: (err) => console.error('Home @ useQuery >>>>>', err),
   })
 
+  // rendering
   const renderPage = () => {
     if (loading) return <Loader active />
     if (error) return <h1>An error occurred</h1>

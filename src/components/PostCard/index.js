@@ -56,6 +56,7 @@ const PostCard = ({
           <Button basic color="teal">
             <Icon name="heart" />
           </Button>
+
           <Label as="a" basic color="teal" pointing="left">
             {likeCount}
           </Label>
@@ -65,6 +66,7 @@ const PostCard = ({
           <Button basic color="blue">
             <Icon name="comments" />
           </Button>
+
           <Label as="a" basic color="blue" pointing="left">
             {commentCount}
           </Label>

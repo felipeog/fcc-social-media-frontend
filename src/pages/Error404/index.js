@@ -1,6 +1,6 @@
 import React from 'react'
 
-const App = () => {
+const Error404 = () => {
   return (
     <>
       <h1>404</h1>
@@ -9,4 +9,4 @@ const App = () => {
   )
 }
 
-export default App
+export default Error404
