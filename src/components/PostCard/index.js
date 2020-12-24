@@ -1,12 +1,11 @@
 import React, { useContext } from 'react'
 import { Card, Icon, Label, Button, Popup } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
-// import { useMutation } from '@apollo/client'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
 
+import LikeButton from '../LikeButton'
 import { UserContext } from '../../context/User'
-// import { LIKE_MUTATION } from './query'
 
 dayjs.extend(relativeTime)
 
@@ -23,15 +22,6 @@ const PostCard = ({
   },
 }) => {
   const { user } = useContext(UserContext)
-  // const [likePost, { loading }] = useMutation(LIKE_MUTATION, {
-  //   variables: {
-  //     postId: id,
-  //   },
-  //   onError: (err) => console.error('PostCard @ likePost >>>>>', err),
-  // })
-
-  const likePost = () => console.log('like')
-  const commentPost = () => console.log('comment')
 
   // rendering
   const renderDeleteButton = () => {
@@ -60,20 +50,7 @@ const PostCard = ({
       </Card.Content>
 
       <Card.Content extra>
-        <Button
-          as="div"
-          labelPosition="right"
-          onClick={likePost}
-          // loading={loading}
-        >
-          <Button basic color="teal">
-            <Icon name="heart" />
-          </Button>
-
-          <Label basic color="teal" pointing="left">
-            {likeCount}
-          </Label>
-        </Button>
+        <LikeButton post={{ id, likes, likeCount }} />
 
         <Button as="div" labelPosition="right" as={Link} to={`/post/${id}`}>
           <Button basic color="blue">

@@ -1,7 +1,7 @@
 import { gql } from '@apollo/client'
 
 export const LIKE_MUTATION = gql`
-  mutation postCard_likeMutation($postId: ID!) {
+  mutation likeButton_likeMutation($postId: ID!) {
     likePost(postId: $postId) {
       body
       commentCount
