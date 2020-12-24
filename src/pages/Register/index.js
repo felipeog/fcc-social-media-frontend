@@ -2,38 +2,31 @@ import React, { useState } from 'react'
 import { Form, Button, Loader, Message } from 'semantic-ui-react'
 import { useMutation } from '@apollo/client'
 
+import { useForm } from '../../hooks/useForm'
 import { REGISTER_MUTATION } from './query'
 
 const Register = ({ history }) => {
+  // state
   const [errors, setErrors] = useState({})
-  const [values, setValues] = useState({
-    username: '',
-    email: '',
-    password: '',
-    confirmPassword: '',
-  })
 
+  // hooks
   const [register, { loading }] = useMutation(REGISTER_MUTATION, {
     onCompleted: () => history.push('/'),
     onError: (err) => {
-      setErrors(err.graphQLErrors[0].extensions.errors)
+      setErrors(err.graphQLErrors[0].extensions?.errors || {})
+    },
+  })
+  const { values, handleInputChange, handleFormSubmit } = useForm({
+    callback: () => register({ variables: { registerInput: { ...values } } }),
+    initialState: {
+      username: '',
+      email: '',
+      password: '',
+      confirmPassword: '',
     },
   })
 
-  const handleInputChange = (event) => {
-    const { name, value } = event.target
-
-    setValues((values) => ({
-      ...values,
-      [name]: value,
-    }))
-  }
-  const handleFormSubmit = (event) => {
-    event.preventDefault()
-
-    register({ variables: { registerInput: { ...values } } })
-  }
-
+  //rendering
   const renderErrors = () => {
     const hasErrors = Object.keys(errors || {}).length > 0
 
