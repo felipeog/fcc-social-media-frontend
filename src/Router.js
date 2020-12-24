@@ -5,13 +5,14 @@ import Home from './pages/Home'
 import Login from './pages/Login'
 import Register from './pages/Register'
 import Error404 from './pages/Error404'
+import AuthRoute from './AuthRoute'
 
 const Router = () => {
   return (
     <Switch>
       <Route exact path="/home" component={Home} />
-      <Route exact path="/login" component={Login} />
-      <Route exact path="/register" component={Register} />
+      <AuthRoute exact path="/login" component={Login} />
+      <AuthRoute exact path="/register" component={Register} />
 
       <Route exact path="/">
         <Redirect to="/home" />
