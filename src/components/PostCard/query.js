@@ -1,4 +1,4 @@
-import gql from 'graphql-tag'
+import { gql } from '@apollo/client'
 
 export const LIKE_MUTATION = gql`
   mutation postCard_likeMutation($postId: ID!) {
