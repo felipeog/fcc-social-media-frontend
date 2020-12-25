@@ -10,7 +10,7 @@ const DeleteButton = ({ postId, callback }) => {
 
   // hooks
   const [deletePost, { loading }] = useMutation(DELETE_POST_MUTATION, {
-    update: (proxy, result) => {
+    update: (proxy) => {
       const { getPosts: prevPosts } = proxy.readQuery({ query: POSTS_QUERY })
       const updatedPosts = prevPosts.filter((post) => post.id !== postId)
       const newData = { getPosts: updatedPosts }

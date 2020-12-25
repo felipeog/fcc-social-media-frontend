@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import { Card, Icon, Label, Button, Popup } from 'semantic-ui-react'
-import { Link, useHistory } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
 
@@ -24,17 +24,11 @@ const PostCard = ({
 }) => {
   // hooks
   const { user } = useContext(UserContext)
-  const history = useHistory()
-
-  // functions
-  const onDeleteCallback = () => {
-    history.push('/')
-  }
 
   // rendering
   const renderDeleteButton = () => {
     if (user && user?.username === username) {
-      return <DeleteButton postId={id} callback={onDeleteCallback} />
+      return <DeleteButton postId={id} />
     }
   }
 
