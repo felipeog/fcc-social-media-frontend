@@ -38,6 +38,4 @@ const client = new ApolloClient({
   }),
 })
 
-export default ({ children }) => (
-  <ApolloProvider client={client}>{children}</ApolloProvider>
-)
+export default (props) => <ApolloProvider {...props} client={client} />
