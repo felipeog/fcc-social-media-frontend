@@ -6,7 +6,7 @@ import { UserContext } from '../../context/User'
 
 import { LIKE_MUTATION } from './query'
 
-const LikeButton = ({ post: { id, likes, likeCount } }) => {
+const LikePostButton = ({ post: { id, likes, likeCount } }) => {
   // state
   const [liked, setLiked] = useState(false)
 
@@ -70,7 +70,7 @@ const LikeButton = ({ post: { id, likes, likeCount } }) => {
     }
   }
 
-  return <div className="LikeButton">{renderComponent()}</div>
+  return <div className="LikePostButton">{renderComponent()}</div>
 }
 
-export default LikeButton
+export default LikePostButton

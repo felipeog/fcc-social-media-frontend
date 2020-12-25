@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
 
-import LikeButton from '../LikeButton'
-import DeleteButton from '../DeleteButton'
+import LikePostButton from '../LikePostButton'
+import DeletePostButton from '../DeletePostButton'
 
 dayjs.extend(relativeTime)
 
@@ -38,7 +38,7 @@ const PostCard = ({
       </Card.Content>
 
       <Card.Content extra>
-        <LikeButton post={{ id, likes, likeCount }} />
+        <LikePostButton post={{ id, likes, likeCount }} />
 
         <Button labelPosition="right" as={Link} to={`/post/${id}`}>
           <Button basic color="blue">
@@ -50,7 +50,7 @@ const PostCard = ({
           </Label>
         </Button>
 
-        <DeleteButton post={{ id, username }} />
+        <DeletePostButton post={{ id, username }} />
       </Card.Content>
     </Card>
   )

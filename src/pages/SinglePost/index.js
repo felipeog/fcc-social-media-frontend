@@ -5,8 +5,8 @@ import { Loader, Grid, Card, Button, Icon, Label } from 'semantic-ui-react'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
 
-import LikeButton from '../../components/LikeButton'
-import DeleteButton from '../../components/DeleteButton'
+import LikePostButton from '../../components/LikePostButton'
+import DeletePostButton from '../../components/DeletePostButton'
 import { POST_QUERY } from './query'
 
 dayjs.extend(relativeTime)
@@ -60,7 +60,7 @@ const SinglePost = ({
             </Card.Content>
 
             <Card.Content extra>
-              <LikeButton post={{ id, likes, likeCount }} />
+              <LikePostButton post={{ id, likes, likeCount }} />
 
               <Button labelPosition="right" as={Link} to={`/post/${id}`}>
                 <Button basic color="blue">
@@ -72,7 +72,7 @@ const SinglePost = ({
                 </Label>
               </Button>
 
-              <DeleteButton
+              <DeletePostButton
                 post={{ id, username }}
                 callback={onDeleteCallback}
               />
