@@ -3,6 +3,7 @@ import { Form, Button, Loader, Message } from 'semantic-ui-react'
 import { useMutation } from '@apollo/client'
 
 import { useForm } from '../../hooks/useForm'
+import FormErrorsList from '../../components/FormErrorsList'
 import { UserContext } from '../../context/User'
 import { REGISTER_MUTATION } from './query'
 
@@ -36,12 +37,6 @@ const Register = ({ history }) => {
   })
 
   //rendering
-  const renderErrors = () => {
-    const hasErrors = Object.keys(errors || {}).length > 0
-
-    if (hasErrors) return <Message error list={Object.values(errors)} />
-  }
-
   const renderPage = () => {
     if (loading) return <Loader active />
 
@@ -89,7 +84,7 @@ const Register = ({ history }) => {
           </Button>
         </Form>
 
-        {renderErrors()}
+        <FormErrorsList errors={errors} />
       </>
     )
   }

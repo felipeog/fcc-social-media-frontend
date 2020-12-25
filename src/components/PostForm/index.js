@@ -3,6 +3,7 @@ import { Button, Form, Message } from 'semantic-ui-react'
 import { useMutation } from '@apollo/client'
 
 import { useForm } from '../../hooks/useForm'
+import FormErrorsList from '../FormErrorsList'
 import { CREATE_POST_MUTATION, POSTS_QUERY } from './query'
 
 const PostForm = () => {
@@ -34,12 +35,6 @@ const PostForm = () => {
   })
 
   // rendering
-  const renderErrors = () => {
-    const hasErrors = Object.keys(errors || {}).length > 0
-
-    if (hasErrors) return <Message error list={Object.values(errors)} />
-  }
-
   return (
     <div className="PostForm">
       <h2>Create a post</h2>
@@ -58,7 +53,7 @@ const PostForm = () => {
         </Form.Field>
       </Form>
 
-      {renderErrors()}
+      <FormErrorsList errors={errors} />
     </div>
   )
 }

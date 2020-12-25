@@ -3,6 +3,7 @@ import { Button, Form, Message } from 'semantic-ui-react'
 import { useMutation } from '@apollo/client'
 
 import { useForm } from '../../hooks/useForm'
+import FormErrorsList from '../FormErrorsList'
 import { CREATE_COMMENT_MUTATION } from './query'
 
 const CommentForm = ({ postId }) => {
@@ -30,12 +31,6 @@ const CommentForm = ({ postId }) => {
   })
 
   // rendering
-  const renderErrors = () => {
-    const hasErrors = Object.keys(errors || {}).length > 0
-
-    if (hasErrors) return <Message error list={Object.values(errors)} />
-  }
-
   return (
     <div className="CommentForm">
       <h2>Create a comment</h2>
@@ -54,7 +49,7 @@ const CommentForm = ({ postId }) => {
         </Form.Field>
       </Form>
 
-      {renderErrors()}
+      <FormErrorsList errors={errors} />
     </div>
   )
 }
