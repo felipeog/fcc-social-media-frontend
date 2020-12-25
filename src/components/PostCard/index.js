@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import { Card, Icon, Label, Button, Popup } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 import dayjs from 'dayjs'
@@ -6,7 +6,6 @@ import relativeTime from 'dayjs/plugin/relativeTime'
 
 import LikeButton from '../LikeButton'
 import DeleteButton from '../DeleteButton'
-import { UserContext } from '../../context/User'
 
 dayjs.extend(relativeTime)
 
@@ -22,16 +21,7 @@ const PostCard = ({
     username,
   },
 }) => {
-  // hooks
-  const { user } = useContext(UserContext)
-
   // rendering
-  const renderDeleteButton = () => {
-    if (user && user?.username === username) {
-      return <DeleteButton postId={id} />
-    }
-  }
-
   return (
     <Card className="PostCard" fluid>
       <Card.Content>
@@ -50,7 +40,7 @@ const PostCard = ({
       <Card.Content extra>
         <LikeButton post={{ id, likes, likeCount }} />
 
-        <Button as="div" labelPosition="right" as={Link} to={`/post/${id}`}>
+        <Button labelPosition="right" as={Link} to={`/post/${id}`}>
           <Button basic color="blue">
             <Icon name="comments" />
           </Button>
@@ -60,7 +50,7 @@ const PostCard = ({
           </Label>
         </Button>
 
-        {renderDeleteButton()}
+        <DeleteButton post={{ id, username }} />
       </Card.Content>
     </Card>
   )
