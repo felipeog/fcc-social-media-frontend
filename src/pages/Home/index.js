@@ -20,7 +20,6 @@ const Home = () => {
     if (error) return <h1>An error occurred</h1>
 
     const posts = data?.getPosts
-    if (!posts?.length) return <h1>No posts found</h1>
 
     return (
       <>

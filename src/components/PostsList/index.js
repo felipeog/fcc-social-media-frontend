@@ -4,6 +4,9 @@ import { Grid, Transition } from 'semantic-ui-react'
 import PostCard from '../PostCard'
 
 const PostsList = ({ posts }) => {
+  // rendering
+  if (!posts?.length) return <h1>No posts found</h1>
+
   return (
     <Grid className="PostsList" columns={3}>
       <Grid.Row>

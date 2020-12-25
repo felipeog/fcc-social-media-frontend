@@ -10,10 +10,10 @@ const CommentsList = ({ postId, comments }) => {
   const { user } = useContext(UserContext)
 
   // rendering
-  return (
-    <div className="CommentsList">
-      {user && <CommentForm postId={postId} />}
+  const renderComments = () => {
+    if (!comments?.length) return <h1>No comments found</h1>
 
+    return (
       <Grid columns={1}>
         <Grid.Row>
           <Transition.Group>
@@ -25,6 +25,14 @@ const CommentsList = ({ postId, comments }) => {
           </Transition.Group>
         </Grid.Row>
       </Grid>
+    )
+  }
+
+  return (
+    <div className="CommentsList">
+      {user && <CommentForm postId={postId} />}
+
+      {renderComments()}
     </div>
   )
 }
