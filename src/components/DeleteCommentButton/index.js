@@ -5,7 +5,7 @@ import { useMutation } from '@apollo/client'
 import { UserContext } from '../../context/User'
 import { DELETE_COMMENT_MUTATION, POST_QUERY } from './query'
 
-const DeleteCommentButton = ({ postId, comment }) => {
+const DeleteCommentButton = ({ postId, comment, callback }) => {
   // state
   const [isConfirmOpen, setIsConfirmOpen] = useState(false)
 
