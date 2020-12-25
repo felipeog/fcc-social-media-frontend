@@ -7,6 +7,7 @@ import relativeTime from 'dayjs/plugin/relativeTime'
 
 import LikePostButton from '../../components/LikePostButton'
 import DeletePostButton from '../../components/DeletePostButton'
+import CommentsList from '../../components/CommentsList'
 import { POST_QUERY } from './query'
 
 dayjs.extend(relativeTime)
@@ -50,36 +51,40 @@ const SinglePost = ({
     } = post
 
     return (
-      <Grid>
-        <Grid.Row>
-          <Card fluid>
-            <Card.Content>
-              <Card.Header>{username}</Card.Header>
-              <Card.Meta>{dayjs(createdAt).fromNow(true)}</Card.Meta>
-              <Card.Description>{body}</Card.Description>
-            </Card.Content>
+      <>
+        <Grid>
+          <Grid.Row>
+            <Card fluid>
+              <Card.Content>
+                <Card.Header>{username}</Card.Header>
+                <Card.Meta>{dayjs(createdAt).fromNow(true)}</Card.Meta>
+                <Card.Description>{body}</Card.Description>
+              </Card.Content>
 
-            <Card.Content extra>
-              <LikePostButton post={{ id, likes, likeCount }} />
+              <Card.Content extra>
+                <LikePostButton post={{ id, likes, likeCount }} />
 
-              <Button labelPosition="right" as={Link} to={`/post/${id}`}>
-                <Button basic color="blue">
-                  <Icon name="comments" />
+                <Button labelPosition="right" as={Link} to={`/post/${id}`}>
+                  <Button basic color="blue">
+                    <Icon name="comments" />
+                  </Button>
+
+                  <Label basic color="blue" pointing="left">
+                    {commentCount}
+                  </Label>
                 </Button>
 
-                <Label basic color="blue" pointing="left">
-                  {commentCount}
-                </Label>
-              </Button>
+                <DeletePostButton
+                  post={{ id, username }}
+                  callback={onDeleteCallback}
+                />
+              </Card.Content>
+            </Card>
+          </Grid.Row>
+        </Grid>
 
-              <DeletePostButton
-                post={{ id, username }}
-                callback={onDeleteCallback}
-              />
-            </Card.Content>
-          </Card>
-        </Grid.Row>
-      </Grid>
+        <CommentsList postId={id} comments={comments} />
+      </>
     )
   }
 
