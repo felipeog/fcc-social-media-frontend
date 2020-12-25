@@ -18,7 +18,7 @@ const SinglePost = ({
     params: { postId },
   },
 }) => {
-  // hooks
+  // queries
   const { data, loading, error } = useQuery(POST_QUERY, {
     variables: {
       postId,

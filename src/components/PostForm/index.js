@@ -9,7 +9,7 @@ const PostForm = () => {
   // state
   const [errors, setErrors] = useState({})
 
-  // hooks
+  // mutations
   const [createPost, { loading, error }] = useMutation(CREATE_POST_MUTATION, {
     update: (proxy, result) => {
       const { getPosts: prevPosts } = proxy.readQuery({ query: POSTS_QUERY })
@@ -26,6 +26,8 @@ const PostForm = () => {
       setErrors(err.graphQLErrors[0].extensions?.errors || {})
     },
   })
+
+  // hooks
   const { values, handleFormSubmit, handleInputChange, resetForm } = useForm({
     callback: () => createPost({ variables: { ...values } }),
     initialState: { body: '' },

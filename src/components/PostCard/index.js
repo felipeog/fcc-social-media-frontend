@@ -10,16 +10,7 @@ import DeletePostButton from '../DeletePostButton'
 dayjs.extend(relativeTime)
 
 const PostCard = ({
-  post: {
-    body,
-    commentCount,
-    comments,
-    createdAt,
-    id,
-    likeCount,
-    likes,
-    username,
-  },
+  post: { body, commentCount, createdAt, id, likeCount, likes, username },
 }) => {
   // rendering
   return (

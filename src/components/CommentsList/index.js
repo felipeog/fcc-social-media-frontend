@@ -6,7 +6,7 @@ import CommentForm from '../CommentForm'
 import { UserContext } from '../../context/User'
 
 const CommentsList = ({ postId, comments }) => {
-  // hooks
+  // context
   const { user } = useContext(UserContext)
 
   // rendering

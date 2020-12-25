@@ -10,8 +10,10 @@ const Register = ({ history }) => {
   // state
   const [errors, setErrors] = useState({})
 
-  // hooks
+  // context
   const userContext = useContext(UserContext)
+
+  // mutations
   const [register, { loading }] = useMutation(REGISTER_MUTATION, {
     onCompleted: ({ register: userData }) => {
       userContext.login(userData)
@@ -21,6 +23,8 @@ const Register = ({ history }) => {
       setErrors(err.graphQLErrors[0].extensions?.errors || {})
     },
   })
+
+  // hooks
   const { values, handleInputChange, handleFormSubmit } = useForm({
     callback: () => register({ variables: { registerInput: { ...values } } }),
     initialState: {

@@ -6,7 +6,7 @@ import AppHeader from './components/AppHeader'
 
 const App = () => {
   return (
-    <Container>
+    <Container className="App">
       <AppHeader />
       <Router />
     </Container>

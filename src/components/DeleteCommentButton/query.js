@@ -28,29 +28,3 @@ export const DELETE_COMMENT_MUTATION = gql`
     }
   }
 `
-
-export const POST_QUERY = gql`
-  query deleteCommentButton_postQuery($postId: ID!) {
-    getPost(postId: $postId) {
-      body
-      commentCount
-      createdAt
-      id
-      likeCount
-      username
-
-      likes {
-        createdAt
-        id
-        username
-      }
-
-      comments {
-        body
-        createdAt
-        id
-        username
-      }
-    }
-  }
-`

@@ -9,7 +9,7 @@ const CommentForm = ({ postId }) => {
   // state
   const [errors, setErrors] = useState({})
 
-  // hooks
+  // mutations
   const [createComment, { loading, error }] = useMutation(
     CREATE_COMMENT_MUTATION,
     {
@@ -22,6 +22,8 @@ const CommentForm = ({ postId }) => {
       },
     }
   )
+
+  // hooks
   const { values, handleFormSubmit, handleInputChange, resetForm } = useForm({
     callback: () => createComment({ variables: { postId, ...values } }),
     initialState: { body: '' },
@@ -35,7 +37,7 @@ const CommentForm = ({ postId }) => {
   }
 
   return (
-    <div className="PostForm">
+    <div className="CommentForm">
       <h2>Create a comment</h2>
 
       <Form loading={loading} onSubmit={handleFormSubmit}>

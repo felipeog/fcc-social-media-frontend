@@ -9,8 +9,10 @@ const DeletePostButton = ({ post, callback }) => {
   // state
   const [isConfirmOpen, setIsConfirmOpen] = useState(false)
 
-  // hooks
+  // context
   const { user } = useContext(UserContext)
+
+  // mutations
   const [deletePost, { loading }] = useMutation(DELETE_POST_MUTATION, {
     update: (proxy) => {
       const { getPosts: prevPosts } = proxy.readQuery({ query: POSTS_QUERY })
@@ -31,6 +33,7 @@ const DeletePostButton = ({ post, callback }) => {
   const handleDelete = () => {
     deletePost({ variables: { postId: post.id } })
   }
+
   const toggleConfirm = () => {
     setIsConfirmOpen((isOpen) => !isOpen)
   }

@@ -8,8 +8,10 @@ import { UserContext } from '../../context/User'
 import { POSTS_QUERY } from './query'
 
 const Home = () => {
-  // hooks
+  // context
   const { user } = useContext(UserContext)
+
+  // queries
   const { data, loading, error } = useQuery(POSTS_QUERY, {
     onError: (err) => console.error('Home @ useQuery >>>>>', err),
   })

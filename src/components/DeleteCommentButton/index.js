@@ -3,14 +3,16 @@ import { Icon, Button, Confirm } from 'semantic-ui-react'
 import { useMutation } from '@apollo/client'
 
 import { UserContext } from '../../context/User'
-import { DELETE_COMMENT_MUTATION, POST_QUERY } from './query'
+import { DELETE_COMMENT_MUTATION } from './query'
 
 const DeleteCommentButton = ({ postId, comment, callback }) => {
   // state
   const [isConfirmOpen, setIsConfirmOpen] = useState(false)
 
-  // hooks
+  // context
   const { user } = useContext(UserContext)
+
+  // mutations
   const [deleteComment, { loading }] = useMutation(DELETE_COMMENT_MUTATION, {
     onCompleted: () => {
       toggleConfirm()
@@ -31,7 +33,7 @@ const DeleteCommentButton = ({ postId, comment, callback }) => {
   // rendering
   if (user && user.username === comment.username) {
     return (
-      <div className="DeletePostButton">
+      <div className="DeleteCommentButton">
         <Button as="div" color="red" loading={loading} onClick={toggleConfirm}>
           <Icon name="trash" />
         </Button>

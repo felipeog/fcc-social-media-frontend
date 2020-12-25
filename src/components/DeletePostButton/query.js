@@ -1,13 +1,13 @@
 import { gql } from '@apollo/client'
 
 export const DELETE_POST_MUTATION = gql`
-  mutation deleteButton_deletePostMutation($postId: ID!) {
+  mutation deletePostButton_deletePostMutation($postId: ID!) {
     deletePost(postId: $postId)
   }
 `
 
 export const POSTS_QUERY = gql`
-  query deleteButton_postsQuery {
+  query deletePostButton_postsQuery {
     getPosts {
       body
       commentCount

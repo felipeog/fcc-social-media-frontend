@@ -10,8 +10,10 @@ const Login = ({ history }) => {
   // state
   const [errors, setErrors] = useState({})
 
-  // hooks
+  // context
   const userContext = useContext(UserContext)
+
+  // mutations
   const [login, { loading }] = useMutation(LOGIN_MUTATION, {
     onCompleted: ({ login: userData }) => {
       userContext.login(userData)
@@ -21,6 +23,8 @@ const Login = ({ history }) => {
       setErrors(err.graphQLErrors[0].extensions?.errors || {})
     },
   })
+
+  // hooks
   const { values, handleInputChange, handleFormSubmit } = useForm({
     callback: () => login({ variables: { ...values } }),
     initialState: {

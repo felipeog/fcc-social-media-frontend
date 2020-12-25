@@ -5,7 +5,7 @@ import { NavLink } from 'react-router-dom'
 import { UserContext } from '../../context/User'
 
 const AppHeader = () => {
-  // hooks
+  // context
   const { user, logout } = useContext(UserContext)
 
   // rendering
@@ -23,6 +23,7 @@ const AppHeader = () => {
       return <Menu.Item name="home" as={NavLink} to="/home" />
     }
   }
+
   const renderRightSide = () => {
     if (user) {
       return (

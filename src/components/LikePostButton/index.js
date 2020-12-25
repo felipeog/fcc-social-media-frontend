@@ -12,7 +12,11 @@ const LikePostButton = ({ post: { id, likes, likeCount } }) => {
 
   // hooks
   const history = useHistory()
+
+  // context
   const { user } = useContext(UserContext)
+
+  // mutations
   const [likePost, { loading }] = useMutation(LIKE_MUTATION, {
     onError: (err) => console.error('PostCard @ likePost >>>>>', err),
   })
