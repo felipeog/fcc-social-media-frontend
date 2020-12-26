@@ -4,6 +4,7 @@ import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
 
 import DeleteCommentButton from '../DeleteCommentButton'
+import './index.scss'
 
 dayjs.extend(relativeTime)
 
@@ -23,9 +24,7 @@ const CommentCard = ({
         />
 
         <Card.Description>{body}</Card.Description>
-      </Card.Content>
 
-      <Card.Content extra>
         <DeleteCommentButton postId={postId} comment={{ id, username }} />
       </Card.Content>
     </Card>
