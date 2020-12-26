@@ -25,9 +25,9 @@ const Home = () => {
 
     return (
       <>
-        <h1>Recents posts</h1>
         {user && <PostForm />}
-        <PostsList posts={posts} />
+
+        <PostsList title="Recent posts" posts={posts} />
       </>
     )
   }
