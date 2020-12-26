@@ -1,14 +1,12 @@
 import React, { useState, useContext } from 'react'
-import { Icon, Button, Confirm } from 'semantic-ui-react'
+import { Confirm } from 'semantic-ui-react'
 import { useMutation } from '@apollo/client'
 
 import { UserContext } from '../../context/User'
 import { DELETE_POST_MUTATION, POSTS_QUERY } from './query'
+import './index.scss'
 
 const DeletePostButton = ({ post, callback }) => {
-  // state
-  const [isConfirmOpen, setIsConfirmOpen] = useState(false)
-
   // context
   const { user } = useContext(UserContext)
 
@@ -23,7 +21,6 @@ const DeletePostButton = ({ post, callback }) => {
 
       proxy.writeQuery({ query: POSTS_QUERY, data: newData })
 
-      toggleConfirm()
       if (callback && typeof callback === 'function') callback()
     },
     onError: (err) => console.error('DeletePostButton @ deletePost >>>>>', err),
@@ -34,22 +31,11 @@ const DeletePostButton = ({ post, callback }) => {
     deletePost({ variables: { postId: post.id } })
   }
 
-  const toggleConfirm = () => {
-    setIsConfirmOpen((isOpen) => !isOpen)
-  }
-
   // rendering
   if (user && user.username === post.username) {
     return (
-      <div className="DeletePostButton">
-        <Button as="div" color="red" loading={loading} onClick={toggleConfirm}>
-          <Icon name="trash" />
-        </Button>
-        <Confirm
-          open={isConfirmOpen}
-          onCancel={toggleConfirm}
-          onConfirm={handleDelete}
-        />
+      <div className="DeletePostButton" onClick={handleDelete}>
+        deletar fof
       </div>
     )
   }

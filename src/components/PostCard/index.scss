@@ -1,0 +1,30 @@
+.PostCard {
+  .username {
+    margin-bottom: 0.2rem;
+    font-size: 0.9rem;
+  }
+
+  .date {
+    color: gray;
+    font-size: 0.7rem;
+    margin-bottom: 0.8rem;
+  }
+
+  .body {
+    display: block;
+    line-height: 1.3;
+    margin-bottom: 0.8rem;
+    text-decoration: none;
+    color: black;
+  }
+
+  .actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .reactions > * + * {
+      margin-left: 0.8rem;
+    }
+  }
+}
