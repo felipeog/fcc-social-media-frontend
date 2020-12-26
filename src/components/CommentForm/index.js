@@ -34,7 +34,7 @@ const CommentForm = ({ postId }) => {
   // rendering
   return (
     <div className="CommentForm">
-      <h2>Create a comment</h2>
+      <h1>Create a comment</h1>
 
       <Form loading={loading} onSubmit={handleFormSubmit}>
         <Form.Field>
