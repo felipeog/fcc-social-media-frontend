@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
-import { Button, Form, Message } from 'semantic-ui-react'
+import { Form } from 'semantic-ui-react'
 import { useMutation } from '@apollo/client'
 
 import { useForm } from '../../hooks/useForm'
 import FormErrorsList from '../FormErrorsList'
 import { CREATE_COMMENT_MUTATION } from './query'
+import './index.scss'
 
 const CommentForm = ({ postId }) => {
   // state
@@ -42,10 +43,11 @@ const CommentForm = ({ postId }) => {
             onChange={handleInputChange}
             error={!!error}
             value={values.body}
+            action={{
+              color: 'teal',
+              content: 'Submit',
+            }}
           />
-          <Button type="submit" color="teal">
-            Submit
-          </Button>
         </Form.Field>
       </Form>
 
