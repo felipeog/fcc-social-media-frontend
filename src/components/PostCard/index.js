@@ -1,11 +1,13 @@
 import React from 'react'
-import { Card, Icon, Label, Button, Popup } from 'semantic-ui-react'
+import { Card, Popup } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
 
 import LikePostButton from '../LikePostButton'
+import CommentPostButton from '../CommentPostButton'
 import DeletePostButton from '../DeletePostButton'
+import './index.scss'
 
 dayjs.extend(relativeTime)
 
@@ -28,18 +30,11 @@ const PostCard = ({
         </Card.Description>
       </Card.Content>
 
-      <Card.Content extra>
-        <LikePostButton post={{ id, likes, likeCount }} />
-
-        <Button labelPosition="right" as={Link} to={`/post/${id}`}>
-          <Button basic color="blue">
-            <Icon name="comments" />
-          </Button>
-
-          <Label basic color="blue" pointing="left">
-            {commentCount}
-          </Label>
-        </Button>
+      <Card.Content className="actions" extra>
+        <div className="actions-left">
+          <LikePostButton post={{ id, likes, likeCount }} />
+          <CommentPostButton post={{ id, commentCount }} />
+        </div>
 
         <DeletePostButton post={{ id, username }} />
       </Card.Content>

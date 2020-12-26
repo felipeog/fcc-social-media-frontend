@@ -1,11 +1,11 @@
 import React from 'react'
 import { useQuery } from '@apollo/client'
-import { Link } from 'react-router-dom'
-import { Loader, Grid, Card, Button, Icon, Label } from 'semantic-ui-react'
+import { Loader, Grid, Card } from 'semantic-ui-react'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
 
 import LikePostButton from '../../components/LikePostButton'
+import CommentPostButton from '../../components/CommentPostButton'
 import DeletePostButton from '../../components/DeletePostButton'
 import CommentsList from '../../components/CommentsList'
 import { POST_QUERY } from './query'
@@ -64,15 +64,7 @@ const SinglePost = ({
               <Card.Content extra>
                 <LikePostButton post={{ id, likes, likeCount }} />
 
-                <Button labelPosition="right" as={Link} to={`/post/${id}`}>
-                  <Button basic color="blue">
-                    <Icon name="comments" />
-                  </Button>
-
-                  <Label basic color="blue" pointing="left">
-                    {commentCount}
-                  </Label>
-                </Button>
+                <CommentPostButton post={{ id, commentCount }} />
 
                 <DeletePostButton
                   post={{ id, username }}
