@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react'
-import { Icon, Button, Confirm } from 'semantic-ui-react'
+import { Icon, Button, Confirm, Popup } from 'semantic-ui-react'
 import { useMutation } from '@apollo/client'
 
 import { UserContext } from '../../context/User'
@@ -40,8 +40,8 @@ const DeletePostButton = ({ post, callback }) => {
   }
 
   // rendering
-  if (user && user.username === post.username) {
-    return (
+  const renderComponent = () => {
+    const ButtonComponent = (
       <div className="DeletePostButton">
         <Button as="div" color="red" loading={loading} onClick={toggleConfirm}>
           <Icon name="trash" />
@@ -53,6 +53,12 @@ const DeletePostButton = ({ post, callback }) => {
         />
       </div>
     )
+
+    return <Popup content="Delete this post" trigger={ButtonComponent} />
+  }
+
+  if (user && user.username === post.username) {
+    return renderComponent()
   }
 
   return null

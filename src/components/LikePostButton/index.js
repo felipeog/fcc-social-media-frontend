@@ -45,6 +45,11 @@ const LikePostButton = ({ post: { id, likes, likeCount } }) => {
 
   // rendering
   const renderComponent = () => {
+    const popupContent = user
+      ? liked
+        ? 'Remove like'
+        : 'Like this post'
+      : 'You must be logged in to like a post'
     const ButtonComponent = (
       <Button
         as="div"
@@ -62,16 +67,7 @@ const LikePostButton = ({ post: { id, likes, likeCount } }) => {
       </Button>
     )
 
-    if (user) {
-      return ButtonComponent
-    } else {
-      return (
-        <Popup
-          content="You must be logged in to like a post"
-          trigger={ButtonComponent}
-        />
-      )
-    }
+    return <Popup content={popupContent} trigger={ButtonComponent} />
   }
 
   return <div className="LikePostButton">{renderComponent()}</div>

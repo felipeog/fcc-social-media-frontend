@@ -1,11 +1,19 @@
-import React from 'react'
-import { Icon, Label, Button } from 'semantic-ui-react'
+import React, { useContext } from 'react'
+import { Icon, Label, Button, Popup } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 
+import { UserContext } from '../../context/User'
+
 const CommentPostButton = ({ post: { id, commentCount } }) => {
+  // context
+  const { user } = useContext(UserContext)
+
   // rendering
-  return (
-    <div className="LikePostButton">
+  const renderComponent = () => {
+    const popupContent = user
+      ? 'Comment this post'
+      : 'You must be logged in to comment a post'
+    const ButtonComponent = (
       <Button labelPosition="right" as={Link} to={`/post/${id}`}>
         <Button basic color="blue">
           <Icon name="comments" />
@@ -15,8 +23,12 @@ const CommentPostButton = ({ post: { id, commentCount } }) => {
           {commentCount}
         </Label>
       </Button>
-    </div>
-  )
+    )
+
+    return <Popup content={popupContent} trigger={ButtonComponent} />
+  }
+
+  return <div className="LikePostButton">{renderComponent()}</div>
 }
 
 export default CommentPostButton
