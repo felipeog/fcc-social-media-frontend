@@ -4,6 +4,7 @@ import { useMutation } from '@apollo/client'
 
 import { UserContext } from '../../context/User'
 import { DELETE_POST_MUTATION, POSTS_QUERY } from './query'
+import './index.scss'
 
 const DeletePostButton = ({ post, callback }) => {
   // state
