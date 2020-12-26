@@ -43,41 +43,45 @@ const Register = ({ history }) => {
     return (
       <>
         <Form onSubmit={handleFormSubmit} noValidate autoComplete="off">
-          <Form.Input
-            label="Username"
-            name="username"
-            type="text"
-            value={values.username}
-            error={!!errors.username}
-            onChange={handleInputChange}
-          />
+          <Form.Group widths="equal">
+            <Form.Input
+              label="Username"
+              name="username"
+              type="text"
+              value={values.username}
+              error={!!errors.username}
+              onChange={handleInputChange}
+            />
 
-          <Form.Input
-            label="Email"
-            name="email"
-            type="email"
-            value={values.email}
-            error={!!errors.email}
-            onChange={handleInputChange}
-          />
+            <Form.Input
+              label="Email"
+              name="email"
+              type="email"
+              value={values.email}
+              error={!!errors.email}
+              onChange={handleInputChange}
+            />
+          </Form.Group>
 
-          <Form.Input
-            label="Password"
-            name="password"
-            type="password"
-            value={values.password}
-            error={!!errors.password}
-            onChange={handleInputChange}
-          />
+          <Form.Group widths="equal">
+            <Form.Input
+              label="Password"
+              name="password"
+              type="password"
+              value={values.password}
+              error={!!errors.password}
+              onChange={handleInputChange}
+            />
 
-          <Form.Input
-            label="Confirm password"
-            name="confirmPassword"
-            type="password"
-            value={values.confirmPassword}
-            error={!!errors.confirmPassword}
-            onChange={handleInputChange}
-          />
+            <Form.Input
+              label="Confirm password"
+              name="confirmPassword"
+              type="password"
+              value={values.confirmPassword}
+              error={!!errors.confirmPassword}
+              onChange={handleInputChange}
+            />
+          </Form.Group>
 
           <Button type="submit" primary>
             Register

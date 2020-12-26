@@ -41,23 +41,25 @@ const Login = ({ history }) => {
     return (
       <>
         <Form onSubmit={handleFormSubmit} noValidate autoComplete="off">
-          <Form.Input
-            label="Username"
-            name="username"
-            type="text"
-            value={values.username}
-            error={!!errors.username}
-            onChange={handleInputChange}
-          />
+          <Form.Group widths="equal">
+            <Form.Input
+              label="Username"
+              name="username"
+              type="text"
+              value={values.username}
+              error={!!errors.username}
+              onChange={handleInputChange}
+            />
 
-          <Form.Input
-            label="Password"
-            name="password"
-            type="password"
-            value={values.password}
-            error={!!errors.password}
-            onChange={handleInputChange}
-          />
+            <Form.Input
+              label="Password"
+              name="password"
+              type="password"
+              value={values.password}
+              error={!!errors.password}
+              onChange={handleInputChange}
+            />
+          </Form.Group>
 
           <Button type="submit" primary>
             Login
