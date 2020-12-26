@@ -16,13 +16,16 @@ const DeletePostButton = ({ post, callback }) => {
   // mutations
   const [deletePost, { loading }] = useMutation(DELETE_POST_MUTATION, {
     update: (proxy) => {
-      const { getPosts: prevPosts } = proxy.readQuery({ query: POSTS_QUERY })
-      const updatedPosts = prevPosts.filter(
-        (prevPost) => prevPost.id !== post.id
-      )
-      const newData = { getPosts: updatedPosts }
+      const data = proxy.readQuery({ query: POSTS_QUERY })
+      if (data) {
+        const { getPosts: prevPosts } = data
+        const updatedPosts = prevPosts.filter(
+          (prevPost) => prevPost.id !== post.id
+        )
+        const newData = { getPosts: updatedPosts }
 
-      proxy.writeQuery({ query: POSTS_QUERY, data: newData })
+        proxy.writeQuery({ query: POSTS_QUERY, data: newData })
+      }
 
       toggleConfirm()
       if (callback && typeof callback === 'function') callback()
