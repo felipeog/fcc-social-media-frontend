@@ -2,6 +2,7 @@ import React from 'react'
 import { Grid, Transition } from 'semantic-ui-react'
 
 import PostCard from '../PostCard'
+import './index.scss'
 
 const PostsList = ({ title, posts }) => {
   // rendering
@@ -13,7 +14,7 @@ const PostsList = ({ title, posts }) => {
         <Grid.Row>
           <Transition.Group>
             {posts.map((post) => (
-              <Grid.Column key={post.id}>
+              <Grid.Column className="post-wrapper" key={post.id}>
                 <PostCard post={post} />
               </Grid.Column>
             ))}
