@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
+import { Button, Form, Message } from 'semantic-ui-react'
 import { useMutation } from '@apollo/client'
 
 import { useForm } from '../../hooks/useForm'
 import FormErrorsList from '../FormErrorsList'
 import { CREATE_POST_MUTATION, POSTS_QUERY } from './query'
-import './index.scss'
 
 const PostForm = () => {
   // state
@@ -37,12 +37,21 @@ const PostForm = () => {
   // rendering
   return (
     <div className="PostForm">
-      <h1 className="title">criar um fof</h1>
+      <h2>Create a post</h2>
 
-      <form onSubmit={handleFormSubmit}>
-        <input name="body" onChange={handleInputChange} value={values.body} />
-        <button type="submit">enviar</button>
-      </form>
+      <Form loading={loading} onSubmit={handleFormSubmit}>
+        <Form.Field>
+          <Form.Input
+            name="body"
+            onChange={handleInputChange}
+            error={!!error}
+            value={values.body}
+          />
+          <Button type="submit" color="teal">
+            Submit
+          </Button>
+        </Form.Field>
+      </Form>
 
       <FormErrorsList errors={errors} />
     </div>

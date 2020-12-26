@@ -19,14 +19,15 @@ const Home = () => {
   // rendering
   const renderPage = () => {
     if (loading) return <Loader active />
-    if (error) return <h1>ocorreu um erro</h1>
+    if (error) return <h1>An error occurred</h1>
 
     const posts = data?.getPosts
 
     return (
       <>
+        <h1>Recents posts</h1>
         {user && <PostForm />}
-        <PostsList title="fofs recentes" posts={posts} />
+        <PostsList posts={posts} />
       </>
     )
   }

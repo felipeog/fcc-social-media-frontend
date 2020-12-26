@@ -1,10 +1,10 @@
 import React, { useContext, useEffect, useState } from 'react'
+import { Icon, Label, Button, Popup } from 'semantic-ui-react'
 import { useHistory } from 'react-router-dom'
 import { useMutation } from '@apollo/client'
 import { UserContext } from '../../context/User'
 
 import { LIKE_MUTATION } from './query'
-import './index.scss'
 
 const LikePostButton = ({ post: { id, likes, likeCount } }) => {
   // state
@@ -44,12 +44,37 @@ const LikePostButton = ({ post: { id, likes, likeCount } }) => {
   }
 
   // rendering
-  return (
-    <div className="LikePostButton" onClick={handleLike}>
-      <span className="label">foda</span>
-      <span className="count">{likeCount}</span>
-    </div>
-  )
+  const renderComponent = () => {
+    const ButtonComponent = (
+      <Button
+        as="div"
+        labelPosition="right"
+        onClick={handleLike}
+        loading={loading}
+      >
+        <Button basic={!liked} color="teal">
+          <Icon name="heart" />
+        </Button>
+
+        <Label basic color="teal" pointing="left">
+          {likeCount}
+        </Label>
+      </Button>
+    )
+
+    if (user) {
+      return ButtonComponent
+    } else {
+      return (
+        <Popup
+          content="You must be logged in to like a post"
+          trigger={ButtonComponent}
+        />
+      )
+    }
+  }
+
+  return <div className="LikePostButton">{renderComponent()}</div>
 }
 
 export default LikePostButton

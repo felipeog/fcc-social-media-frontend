@@ -1,39 +1,37 @@
 import React from 'react'
+import { Card, Icon, Label, Button, Popup } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
-import 'dayjs/locale/pt-br'
 
 import LikePostButton from '../LikePostButton'
 import DeletePostButton from '../DeletePostButton'
-import './index.scss'
 
 dayjs.extend(relativeTime)
-dayjs.locale('pt-br')
 
 const PostCard = ({
   post: { body, commentCount, createdAt, id, likeCount, likes, username },
 }) => {
   // rendering
   return (
-    <div className="PostCard">
-      <div className="content">
-        <p className="username">{username}</p>
+    <Card className="PostCard" fluid>
+      <Card.Content>
+        <Card.Header>{username}</Card.Header>
 
-        <p className="date">{dayjs(createdAt).fromNow(true)}</p>
+        <Popup
+          content={dayjs(createdAt).format('MMMM D, YYYY - HH:mm')}
+          trigger={<Card.Meta>{dayjs(createdAt).fromNow(true)}</Card.Meta>}
+        />
 
-        <Link className="body" to={`/post/${id}`}>
+        <Card.Description as={Link} to={`/post/${id}`}>
           {body}
-        </Link>
-      </div>
+        </Card.Description>
+      </Card.Content>
 
-      <div className="actions">
-        <div className="reactions">
-          <LikePostButton post={{ id, likes, likeCount }} />
-          <LikePostButton post={{ id, likes, likeCount }} />
-        </div>
+      <Card.Content extra>
+        <LikePostButton post={{ id, likes, likeCount }} />
 
-        {/* <Button labelPosition="right" as={Link} to={`/post/${id}`}>
+        <Button labelPosition="right" as={Link} to={`/post/${id}`}>
           <Button basic color="blue">
             <Icon name="comments" />
           </Button>
@@ -41,11 +39,11 @@ const PostCard = ({
           <Label basic color="blue" pointing="left">
             {commentCount}
           </Label>
-        </Button> */}
+        </Button>
 
         <DeletePostButton post={{ id, username }} />
-      </div>
-    </div>
+      </Card.Content>
+    </Card>
   )
 }
 
