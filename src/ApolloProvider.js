@@ -23,6 +23,7 @@ const authLink = setContext(() => {
   }
 })
 
+const mergeIncoming = (_, incoming) => incoming
 const client = new ApolloClient({
   link: authLink.concat(httpLink),
   cache: new InMemoryCache({
@@ -30,17 +31,17 @@ const client = new ApolloClient({
       Query: {
         fields: {
           getPosts: {
-            merge: (_, incoming) => incoming,
+            merge: mergeIncoming,
           },
         },
       },
       Post: {
         fields: {
           comments: {
-            merge: (_, incoming) => incoming,
+            merge: mergeIncoming,
           },
           likes: {
-            merge: (_, incoming) => incoming,
+            merge: mergeIncoming,
           },
         },
       },

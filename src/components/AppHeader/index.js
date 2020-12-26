@@ -2,51 +2,46 @@ import React, { useContext } from 'react'
 import { Menu } from 'semantic-ui-react'
 import { NavLink } from 'react-router-dom'
 
+import FofLogo from '../../assets/fof-logo.svg'
 import { UserContext } from '../../context/User'
+import './index.scss'
 
 const AppHeader = () => {
   // context
   const { user, logout } = useContext(UserContext)
 
   // rendering
-  const renderLeftSide = () => {
-    if (user) {
-      return (
-        <Menu.Item
-          name={user.username}
-          isActive={() => true}
-          as={NavLink}
-          to="/home"
-        />
-      )
-    } else {
-      return <Menu.Item name="home" as={NavLink} to="/home" />
-    }
-  }
-
   const renderRightSide = () => {
     if (user) {
       return (
         <>
-          <Menu.Item name="logout" onClick={logout} />
+          <div className="header-link" onClick={logout}>
+            sair
+          </div>
         </>
       )
     } else {
       return (
         <>
-          <Menu.Item name="login" as={NavLink} to="/login" />
-          <Menu.Item name="register" as={NavLink} to="/register" />
+          <NavLink className="header-link" to="/login">
+            entrar
+          </NavLink>
+          <NavLink className="header-link" to="/register">
+            registrar-se
+          </NavLink>
         </>
       )
     }
   }
 
   return (
-    <Menu pointing secondary>
-      {renderLeftSide()}
+    <div className="AppHeader">
+      <NavLink className="home-link" to="/home">
+        <img className="logo" src={FofLogo} alt="" />
+      </NavLink>
 
-      <Menu.Menu position="right">{renderRightSide()}</Menu.Menu>
-    </Menu>
+      <div className="right">{renderRightSide()}</div>
+    </div>
   )
 }
 

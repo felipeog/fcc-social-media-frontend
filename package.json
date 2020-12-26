@@ -19,7 +19,8 @@
   },
   "homepage": "https://github.com/felipeog/fcc-social-media-frontend#readme",
   "devDependencies": {
-    "parcel-bundler": "^1.12.4"
+    "parcel-bundler": "^1.12.4",
+    "sass": "^1.30.0"
   },
   "dependencies": {
     "@apollo/client": "^3.3.6",
