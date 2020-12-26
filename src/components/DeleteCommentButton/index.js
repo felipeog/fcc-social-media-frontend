@@ -4,6 +4,7 @@ import { useMutation } from '@apollo/client'
 
 import { UserContext } from '../../context/User'
 import { DELETE_COMMENT_MUTATION } from './query'
+import './index.scss'
 
 const DeleteCommentButton = ({ postId, comment, callback }) => {
   // state
