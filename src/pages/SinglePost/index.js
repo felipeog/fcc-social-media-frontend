@@ -7,6 +7,7 @@ import relativeTime from 'dayjs/plugin/relativeTime'
 import CommentsList from '../../components/CommentsList'
 import PostCard from '../../components/PostCard'
 import { POST_QUERY } from './query'
+import './index.scss'
 
 dayjs.extend(relativeTime)
 
@@ -42,7 +43,7 @@ const SinglePost = ({
     return (
       <>
         <PostCard post={post} onDeleteCallback={onDeleteCallback} />
-        <CommentsList postId={id} comments={comments} />
+        <CommentsList title="Comments" post={{ id, comments }} />
       </>
     )
   }

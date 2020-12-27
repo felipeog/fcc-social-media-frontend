@@ -7,7 +7,7 @@ import './index.scss'
 const PostsList = ({ title, posts }) => {
   // rendering
   const renderPosts = () => {
-    if (!posts?.length) return <h1>No posts found</h1>
+    if (!posts?.length) return <h2>No posts found</h2>
 
     return (
       <Grid className="PostsList" columns={3}>

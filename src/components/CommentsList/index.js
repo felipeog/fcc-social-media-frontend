@@ -6,13 +6,13 @@ import CommentForm from '../CommentForm'
 import { UserContext } from '../../context/User'
 import './index.scss'
 
-const CommentsList = ({ postId, comments }) => {
+const CommentsList = ({ title, post: { id, comments } }) => {
   // context
   const { user } = useContext(UserContext)
 
   // rendering
   const renderComments = () => {
-    if (!comments?.length) return <h1>No comments found</h1>
+    if (!comments?.length) return <h2>No comments found</h2>
 
     return (
       <Grid columns={1}>
@@ -20,7 +20,7 @@ const CommentsList = ({ postId, comments }) => {
           <Transition.Group>
             {comments.map((comment) => (
               <Grid.Column className="comment-wrapper" key={comment.id}>
-                <CommentCard postId={postId} comment={comment} />
+                <CommentCard post={{ id, comment }} />
               </Grid.Column>
             ))}
           </Transition.Group>
@@ -31,8 +31,9 @@ const CommentsList = ({ postId, comments }) => {
 
   return (
     <div className="CommentsList">
-      {user && <CommentForm postId={postId} />}
+      {user && <CommentForm postId={id} />}
 
+      {title && <h1>{title}</h1>}
       {renderComments()}
     </div>
   )

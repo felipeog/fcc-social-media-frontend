@@ -9,8 +9,10 @@ import './index.scss'
 dayjs.extend(relativeTime)
 
 const CommentCard = ({
-  postId,
-  comment: { body, createdAt, id, username },
+  post: {
+    id: postId,
+    comment: { body, createdAt, id, username },
+  },
 }) => {
   // rendering
   return (
