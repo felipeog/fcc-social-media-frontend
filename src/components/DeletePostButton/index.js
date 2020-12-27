@@ -46,7 +46,13 @@ const DeletePostButton = ({ post, callback }) => {
   const renderComponent = () => {
     const ButtonComponent = (
       <div className="DeletePostButton">
-        <Button as="div" color="red" loading={loading} onClick={toggleConfirm}>
+        <Button
+          basic
+          as="div"
+          color="red"
+          loading={loading}
+          onClick={toggleConfirm}
+        >
           <Icon name="trash" />
         </Button>
         <Confirm
