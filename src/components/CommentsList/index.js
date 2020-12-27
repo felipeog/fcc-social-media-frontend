@@ -4,6 +4,7 @@ import { Grid, Transition } from 'semantic-ui-react'
 import CommentCard from '../CommentCard'
 import CommentForm from '../CommentForm'
 import { UserContext } from '../../context/User'
+import './index.scss'
 
 const CommentsList = ({ postId, comments }) => {
   // context
@@ -18,7 +19,7 @@ const CommentsList = ({ postId, comments }) => {
         <Grid.Row>
           <Transition.Group>
             {comments.map((comment) => (
-              <Grid.Column key={comment.id}>
+              <Grid.Column className="comment-wrapper" key={comment.id}>
                 <CommentCard postId={postId} comment={comment} />
               </Grid.Column>
             ))}
