@@ -10,11 +10,11 @@ const PostsList = ({ title, posts }) => {
     if (!posts?.length) return <h2>No posts found</h2>
 
     return (
-      <Grid columns={3}>
+      <Grid columns={2} stackable>
         <Grid.Row>
           <Transition.Group>
             {posts.map((post) => (
-              <Grid.Column className="post-wrapper" key={post.id}>
+              <Grid.Column className="post-wrapper" stretched key={post.id}>
                 <PostCard post={post} />
               </Grid.Column>
             ))}

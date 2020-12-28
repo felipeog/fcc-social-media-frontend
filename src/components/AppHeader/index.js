@@ -30,10 +30,10 @@ const AppHeader = () => {
       return <Menu.Item name="logout" onClick={UserStore.logout} />
     } else {
       return (
-        <Menu.Menu position="right">
+        <>
           <Menu.Item name="login" as={NavLink} to="/login" />
           <Menu.Item name="register" as={NavLink} to="/register" />
-        </Menu.Menu>
+        </>
       )
     }
   }
@@ -41,7 +41,8 @@ const AppHeader = () => {
   return (
     <Menu className="AppHeader" pointing secondary>
       {renderLeftSide()}
-      {renderRightSide()}
+
+      <Menu.Menu position="right">{renderRightSide()}</Menu.Menu>
     </Menu>
   )
 }
