@@ -1,6 +1,7 @@
 import { makeObservable, observable, action, computed } from 'mobx'
+import { toast } from 'react-toastify'
 
-import { LS_TOKEN_KEY } from '../consts'
+import { LS_TOKEN_KEY, SESSION_EXPIRED_MESSAGE } from '../consts'
 import getUserFromToken from '../utils/getUserFromToken'
 
 class UserStore {
@@ -21,6 +22,7 @@ class UserStore {
 
       if (user.exp * 1_000 < Date.now()) {
         localStorage.removeItem(LS_TOKEN_KEY)
+        toast(SESSION_EXPIRED_MESSAGE)
       } else {
         this.user = user
       }

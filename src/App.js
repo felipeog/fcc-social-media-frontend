@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import { observer } from 'mobx-react-lite'
 import { Container } from 'semantic-ui-react'
+import { ToastContainer, Slide } from 'react-toastify'
 
 import Router from './Router'
 import AppHeader from './components/AppHeader'
@@ -38,10 +39,23 @@ const App = () => {
 
   // rendering
   return (
-    <Container className="App">
-      <AppHeader />
-      <Router />
-    </Container>
+    <>
+      <Container className="App">
+        <AppHeader />
+        <Router />
+      </Container>
+
+      <ToastContainer
+        transition={Slide}
+        position="bottom-left"
+        autoClose={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable={false}
+      />
+    </>
   )
 }
 

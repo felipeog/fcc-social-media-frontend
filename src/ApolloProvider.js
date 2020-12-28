@@ -1,4 +1,5 @@
 import React from 'react'
+import { toast } from 'react-toastify'
 import {
   InMemoryCache,
   createHttpLink,
@@ -9,7 +10,7 @@ import { ApolloLink } from '@apollo/client/link/core'
 import { setContext } from '@apollo/client/link/context'
 import { onError } from '@apollo/client/link/error'
 
-import { LS_TOKEN_KEY } from './consts'
+import { LS_TOKEN_KEY, SESSION_EXPIRED_MESSAGE } from './consts'
 import UserStore from './stores/UserStore'
 
 const authLink = setContext(() => {
@@ -37,6 +38,7 @@ const errorLink = onError(({ graphQLErrors, networkError, operation }) => {
 
       if (code === 'UNAUTHENTICATED') {
         UserStore.logout()
+        toast(SESSION_EXPIRED_MESSAGE)
       }
     })
   }
