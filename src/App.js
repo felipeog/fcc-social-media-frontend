@@ -48,7 +48,7 @@ const App = () => {
       <ToastContainer
         transition={Slide}
         position="bottom-left"
-        autoClose={false}
+        autoClose={5000}
         newestOnTop={false}
         closeOnClick
         rtl={false}
