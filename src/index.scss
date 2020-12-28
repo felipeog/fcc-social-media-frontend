@@ -1,7 +1,10 @@
-.Toastify__toast-body {
-  font-family: Lato, 'Helvetica Neue', Arial, Helvetica, sans-serif;
-}
+// react-toastify styling
+.Toastify {
+  &__toast-body {
+    font-family: Lato, 'Helvetica Neue', Arial, Helvetica, sans-serif;
+  }
 
-.Toastify__progress-bar--default {
-  background: #42c4be;
+  &__progress-bar--default {
+    background: #42c4be;
+  }
 }
