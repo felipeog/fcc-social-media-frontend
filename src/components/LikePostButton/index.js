@@ -3,9 +3,11 @@ import { Icon, Label, Button, Popup } from 'semantic-ui-react'
 import { useHistory } from 'react-router-dom'
 import { useMutation } from '@apollo/client'
 import { observer } from 'mobx-react-lite'
+import { toast } from 'react-toastify'
 
 import UserStore from '../../stores/UserStore'
 import { LIKE_MUTATION } from './query'
+import { REFRESH_PAGE_MESSAGE } from '../../consts'
 
 const LikePostButton = ({ post: { id, likes, likeCount } }) => {
   // state
@@ -19,7 +21,10 @@ const LikePostButton = ({ post: { id, likes, likeCount } }) => {
 
   // mutations
   const [likePost, { loading }] = useMutation(LIKE_MUTATION, {
-    onError: (err) => console.error('PostCard @ likePost >>>>>', err),
+    onError: (err) => {
+      toast('Error liking post.', REFRESH_PAGE_MESSAGE)
+      console.error('PostCard @ likePost >>>>>', err)
+    },
   })
 
   // effects

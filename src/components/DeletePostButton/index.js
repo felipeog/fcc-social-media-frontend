@@ -2,9 +2,11 @@ import React, { useState } from 'react'
 import { Icon, Button, Confirm, Popup } from 'semantic-ui-react'
 import { useMutation } from '@apollo/client'
 import { observer } from 'mobx-react-lite'
+import { toast } from 'react-toastify'
 
 import UserStore from '../../stores/UserStore'
 import { DELETE_POST_MUTATION, POSTS_QUERY } from './query'
+import { REFRESH_PAGE_MESSAGE } from '../../consts'
 import './index.scss'
 
 const DeletePostButton = ({ post, callback }) => {
@@ -31,7 +33,10 @@ const DeletePostButton = ({ post, callback }) => {
       toggleConfirm()
       if (callback && typeof callback === 'function') callback()
     },
-    onError: (err) => console.error('DeletePostButton @ deletePost >>>>>', err),
+    onError: (err) => {
+      toast('Error deleting post.', REFRESH_PAGE_MESSAGE)
+      console.error('DeletePostButton @ deletePost >>>>>', err)
+    },
   })
 
   // functions

@@ -2,9 +2,11 @@ import React, { useState } from 'react'
 import { Icon, Button, Confirm, Popup } from 'semantic-ui-react'
 import { useMutation } from '@apollo/client'
 import { observer } from 'mobx-react-lite'
+import { toast } from 'react-toastify'
 
 import UserStore from '../../stores/UserStore'
 import { DELETE_COMMENT_MUTATION } from './query'
+import { REFRESH_PAGE_MESSAGE } from '../../consts'
 import './index.scss'
 
 const DeleteCommentButton = ({ postId, comment, callback }) => {
@@ -20,8 +22,10 @@ const DeleteCommentButton = ({ postId, comment, callback }) => {
       toggleConfirm()
       if (callback && typeof callback === 'function') callback()
     },
-    onError: (err) =>
-      console.error('DeleteCommentButton @ deleteComment >>>>>', err),
+    onError: (err) => {
+      toast('Error deleting comment.', REFRESH_PAGE_MESSAGE)
+      console.error('DeleteCommentButton @ deleteComment >>>>>', err)
+    },
   })
 
   // functions
