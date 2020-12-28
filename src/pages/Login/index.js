@@ -70,7 +70,7 @@ const Login = ({ history }) => {
   }
 
   return (
-    <div className="Register">
+    <div className="Login">
       <h1>Login</h1>
 
       {renderPage()}
