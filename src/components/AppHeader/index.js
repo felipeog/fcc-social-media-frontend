@@ -27,26 +27,21 @@ const AppHeader = () => {
 
   const renderRightSide = () => {
     if (UserStore.isLoggedIn) {
-      return (
-        <>
-          <Menu.Item name="logout" onClick={UserStore.logout} />
-        </>
-      )
+      return <Menu.Item name="logout" onClick={UserStore.logout} />
     } else {
       return (
-        <>
+        <Menu.Menu position="right">
           <Menu.Item name="login" as={NavLink} to="/login" />
           <Menu.Item name="register" as={NavLink} to="/register" />
-        </>
+        </Menu.Menu>
       )
     }
   }
 
   return (
-    <Menu pointing secondary>
+    <Menu className="AppHeader" pointing secondary>
       {renderLeftSide()}
-
-      <Menu.Menu position="right">{renderRightSide()}</Menu.Menu>
+      {renderRightSide()}
     </Menu>
   )
 }

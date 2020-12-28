@@ -10,7 +10,7 @@ const PostsList = ({ title, posts }) => {
     if (!posts?.length) return <h2>No posts found</h2>
 
     return (
-      <Grid className="PostsList" columns={3}>
+      <Grid columns={3}>
         <Grid.Row>
           <Transition.Group>
             {posts.map((post) => (

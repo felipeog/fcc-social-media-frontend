@@ -26,7 +26,7 @@ const CommentPostButton = ({ post: { id, commentCount } }) => {
     return <Popup content={popupContent} trigger={ButtonComponent} />
   }
 
-  return <div className="LikePostButton">{renderComponent()}</div>
+  return <div className="CommentPostButton">{renderComponent()}</div>
 }
 
 export default observer(CommentPostButton)

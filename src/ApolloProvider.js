@@ -13,6 +13,7 @@ import { onError } from '@apollo/client/link/error'
 import { LS_TOKEN_KEY, SESSION_EXPIRED_MESSAGE } from './consts'
 import UserStore from './stores/UserStore'
 
+// links
 const authLink = setContext(() => {
   const token = localStorage.getItem(LS_TOKEN_KEY)
 
@@ -54,6 +55,7 @@ const httpLink = createHttpLink({
 
 const link = ApolloLink.from([authLink, errorLink, httpLink])
 
+// client
 const mergeIncoming = (_, incoming) => incoming
 const client = new ApolloClient({
   link,
