@@ -1,8 +1,9 @@
-import React, { useState, useContext } from 'react'
+import React, { useState } from 'react'
 import { Icon, Button, Confirm, Popup } from 'semantic-ui-react'
 import { useMutation } from '@apollo/client'
+import { observer } from 'mobx-react-lite'
 
-import { UserContext } from '../../context/User'
+import UserStore from '../../stores/UserStore'
 import { DELETE_COMMENT_MUTATION } from './query'
 import './index.scss'
 
@@ -11,7 +12,7 @@ const DeleteCommentButton = ({ postId, comment, callback }) => {
   const [isConfirmOpen, setIsConfirmOpen] = useState(false)
 
   // context
-  const { user } = useContext(UserContext)
+  const user = UserStore.getUser
 
   // mutations
   const [deleteComment, { loading }] = useMutation(DELETE_COMMENT_MUTATION, {
@@ -62,4 +63,4 @@ const DeleteCommentButton = ({ postId, comment, callback }) => {
   return null
 }
 
-export default DeleteCommentButton
+export default observer(DeleteCommentButton)

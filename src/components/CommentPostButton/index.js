@@ -1,16 +1,14 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import { Icon, Label, Button, Popup } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
+import { observer } from 'mobx-react-lite'
 
-import { UserContext } from '../../context/User'
+import UserStore from '../../stores/UserStore'
 
 const CommentPostButton = ({ post: { id, commentCount } }) => {
-  // context
-  const { user } = useContext(UserContext)
-
   // rendering
   const renderComponent = () => {
-    const popupContent = user
+    const popupContent = UserStore.isLoggedIn
       ? 'Comment this post'
       : 'You must be logged in to comment a post'
     const ButtonComponent = (
@@ -31,4 +29,4 @@ const CommentPostButton = ({ post: { id, commentCount } }) => {
   return <div className="LikePostButton">{renderComponent()}</div>
 }
 
-export default CommentPostButton
+export default observer(CommentPostButton)

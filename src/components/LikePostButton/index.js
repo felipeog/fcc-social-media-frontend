@@ -1,9 +1,10 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Icon, Label, Button, Popup } from 'semantic-ui-react'
 import { useHistory } from 'react-router-dom'
 import { useMutation } from '@apollo/client'
-import { UserContext } from '../../context/User'
+import { observer } from 'mobx-react-lite'
 
+import UserStore from '../../stores/UserStore'
 import { LIKE_MUTATION } from './query'
 
 const LikePostButton = ({ post: { id, likes, likeCount } }) => {
@@ -14,7 +15,7 @@ const LikePostButton = ({ post: { id, likes, likeCount } }) => {
   const history = useHistory()
 
   // context
-  const { user } = useContext(UserContext)
+  const user = UserStore.getUser
 
   // mutations
   const [likePost, { loading }] = useMutation(LIKE_MUTATION, {
@@ -32,7 +33,7 @@ const LikePostButton = ({ post: { id, likes, likeCount } }) => {
 
   // functions
   const handleLike = () => {
-    if (user) {
+    if (UserStore.isLoggedIn) {
       likePost({
         variables: {
           postId: id,
@@ -45,7 +46,7 @@ const LikePostButton = ({ post: { id, likes, likeCount } }) => {
 
   // rendering
   const renderComponent = () => {
-    const popupContent = user
+    const popupContent = UserStore.isLoggedIn
       ? liked
         ? 'Remove like'
         : 'Like this post'
@@ -73,4 +74,4 @@ const LikePostButton = ({ post: { id, likes, likeCount } }) => {
   return <div className="LikePostButton">{renderComponent()}</div>
 }
 
-export default LikePostButton
+export default observer(LikePostButton)

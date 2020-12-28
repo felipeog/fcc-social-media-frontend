@@ -1,16 +1,17 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import { Menu } from 'semantic-ui-react'
 import { NavLink } from 'react-router-dom'
+import { observer } from 'mobx-react-lite'
 
-import { UserContext } from '../../context/User'
+import UserStore from '../../stores/UserStore'
 
 const AppHeader = () => {
   // context
-  const { user, logout } = useContext(UserContext)
+  const user = UserStore.getUser
 
   // rendering
   const renderLeftSide = () => {
-    if (user) {
+    if (UserStore.isLoggedIn) {
       return (
         <Menu.Item
           name={user.username}
@@ -25,10 +26,10 @@ const AppHeader = () => {
   }
 
   const renderRightSide = () => {
-    if (user) {
+    if (UserStore.isLoggedIn) {
       return (
         <>
-          <Menu.Item name="logout" onClick={logout} />
+          <Menu.Item name="logout" onClick={UserStore.logout} />
         </>
       )
     } else {
@@ -50,4 +51,4 @@ const AppHeader = () => {
   )
 }
 
-export default AppHeader
+export default observer(AppHeader)

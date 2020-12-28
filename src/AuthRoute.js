@@ -1,13 +1,12 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import { Route, Redirect } from 'react-router-dom'
+import { observer } from 'mobx-react-lite'
 
-import { UserContext } from './context/User'
+import UserStore from './stores/UserStore'
 
 const AuthRoute = ({ component: Component, ...rest }) => {
-  const { user } = useContext(UserContext)
-
   const render = (props) => {
-    if (user) {
+    if (UserStore.isLoggedIn) {
       return <Redirect to="/" />
     } else {
       return <Component {...props} />
@@ -17,4 +16,4 @@ const AuthRoute = ({ component: Component, ...rest }) => {
   return <Route {...rest} render={render} />
 }
 
-export default AuthRoute
+export default observer(AuthRoute)

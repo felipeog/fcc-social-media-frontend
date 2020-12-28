@@ -1,23 +1,21 @@
-import React, { useContext, useState } from 'react'
-import { Form, Button, Loader, Message } from 'semantic-ui-react'
+import React, { useState } from 'react'
+import { Form, Button, Loader } from 'semantic-ui-react'
 import { useMutation } from '@apollo/client'
+import { observer } from 'mobx-react-lite'
 
 import { useForm } from '../../hooks/useForm'
 import FormErrorsList from '../../components/FormErrorsList'
-import { UserContext } from '../../context/User'
+import UserStore from '../../stores/UserStore'
 import { LOGIN_MUTATION } from './query'
 
 const Login = ({ history }) => {
   // state
   const [errors, setErrors] = useState({})
 
-  // context
-  const userContext = useContext(UserContext)
-
   // mutations
   const [login, { loading }] = useMutation(LOGIN_MUTATION, {
     onCompleted: ({ login: userData }) => {
-      userContext.login(userData)
+      UserStore.login(userData)
       history.push('/')
     },
     onError: (err) => {
@@ -80,4 +78,4 @@ const Login = ({ history }) => {
   )
 }
 
-export default Login
+export default observer(Login)

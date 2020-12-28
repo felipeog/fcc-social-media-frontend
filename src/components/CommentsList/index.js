@@ -1,15 +1,13 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import { Grid, Transition } from 'semantic-ui-react'
+import { observer } from 'mobx-react-lite'
 
 import CommentCard from '../CommentCard'
 import CommentForm from '../CommentForm'
-import { UserContext } from '../../context/User'
+import UserStore from '../../stores/UserStore'
 import './index.scss'
 
 const CommentsList = ({ title, post: { id, comments } }) => {
-  // context
-  const { user } = useContext(UserContext)
-
   // rendering
   const renderComments = () => {
     if (!comments?.length) return <h2>No comments found</h2>
@@ -31,7 +29,7 @@ const CommentsList = ({ title, post: { id, comments } }) => {
 
   return (
     <div className="CommentsList">
-      {user && <CommentForm postId={id} />}
+      {UserStore.isLoggedIn && <CommentForm postId={id} />}
 
       {title && <h1>{title}</h1>}
       {renderComments()}
@@ -39,4 +37,4 @@ const CommentsList = ({ title, post: { id, comments } }) => {
   )
 }
 
-export default CommentsList
+export default observer(CommentsList)

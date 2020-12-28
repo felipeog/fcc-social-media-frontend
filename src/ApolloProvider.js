@@ -10,6 +10,7 @@ import { setContext } from '@apollo/client/link/context'
 import { onError } from '@apollo/client/link/error'
 
 import { LS_TOKEN_KEY } from './consts'
+import UserStore from './stores/UserStore'
 
 const authLink = setContext(() => {
   const token = localStorage.getItem(LS_TOKEN_KEY)
@@ -21,9 +22,9 @@ const authLink = setContext(() => {
   }
 })
 
-const stringify = (input) => JSON.stringify(input, null, 2)
+const stringify = (input) => JSON.stringify(input)
 const errorLink = onError(({ graphQLErrors, networkError, operation }) => {
-  if (graphQLErrors)
+  if (graphQLErrors) {
     graphQLErrors.map(({ message, locations, path, extensions: { code } }) => {
       console.error('[GraphQL error]')
       console.group()
@@ -33,9 +34,16 @@ const errorLink = onError(({ graphQLErrors, networkError, operation }) => {
       console.error(`Locations: ${stringify(locations)}`)
       console.error(`Path: ${stringify(path)}`)
       console.groupEnd()
-    })
 
-  if (networkError) console.error(`[Network error]: ${stringify(networkError)}`)
+      if (code === 'UNAUTHENTICATED') {
+        UserStore.logout()
+      }
+    })
+  }
+
+  if (networkError) {
+    console.error(`[Network error]: ${stringify(networkError)}`)
+  }
 })
 
 const httpLink = createHttpLink({

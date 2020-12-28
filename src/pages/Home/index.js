@@ -1,16 +1,14 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import { useQuery } from '@apollo/client'
 import { Loader } from 'semantic-ui-react'
+import { observer } from 'mobx-react-lite'
 
 import PostsList from '../../components/PostsList'
 import PostForm from '../../components/PostForm'
-import { UserContext } from '../../context/User'
+import UserStore from '../../stores/UserStore'
 import { POSTS_QUERY } from './query'
 
 const Home = () => {
-  // context
-  const { user } = useContext(UserContext)
-
   // queries
   const { data, loading, error } = useQuery(POSTS_QUERY, {
     onError: (err) => console.error('Home @ useQuery >>>>>', err),
@@ -25,7 +23,7 @@ const Home = () => {
 
     return (
       <>
-        {user && <PostForm />}
+        {UserStore.isLoggedIn && <PostForm />}
 
         <PostsList title="Recent posts" posts={posts} />
       </>
@@ -35,4 +33,4 @@ const Home = () => {
   return <div className="Home">{renderPage()}</div>
 }
 
-export default Home
+export default observer(Home)
