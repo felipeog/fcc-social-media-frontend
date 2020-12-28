@@ -1,6 +1,8 @@
 import React from 'react'
 import { Message } from 'semantic-ui-react'
 
+import './index.scss'
+
 const FormErrorsList = ({ errors }) => {
   // rendering
   const hasErrors = Object.keys(errors || {}).length > 0
