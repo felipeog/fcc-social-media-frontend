@@ -27,4 +27,11 @@ Simple social media app using **MongoDB**, **Express**, **React**, **Node** and 
 }
 ```
 
+## How to run
+
+- Clone the repo
+- `npm i`
+- Make sure that the backend is running on `http://localhost:5000`
+- `npm start`
+
 ## [Backend repo](https://github.com/felipeog/fcc-social-media-backend)
