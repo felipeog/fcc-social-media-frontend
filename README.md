@@ -4,29 +4,9 @@
 
 Simple social media app using **MongoDB**, **Express**, **React**, **Node** and **GraphQL**, the "**MERNG**" stack.
 
-```json
-{
-  "devDependencies": {
-    "parcel-bundler": "^1.12.4",
-    "sass": "^1.30.0"
-  },
-  "dependencies": {
-    "@apollo/client": "^3.3.6",
-    "dayjs": "^1.9.7",
-    "graphql": "^15.4.0",
-    "jwt-decode": "^3.1.2",
-    "mobx": "^6.0.4",
-    "mobx-react-lite": "^3.1.6",
-    "react": "^17.0.1",
-    "react-dom": "^17.0.1",
-    "react-google-recaptcha": "^2.1.0",
-    "react-router-dom": "^5.2.0",
-    "react-toastify": "^6.2.0",
-    "semantic-ui-css": "^2.4.1",
-    "semantic-ui-react": "^2.0.1"
-  }
-}
-```
+## Live demo
+
+https://fcc-social-media.netlify.app
 
 ## How to run
 
@@ -42,4 +22,10 @@ BACKEND_URI=[optional-backend-uri] # defaults to http://localhost:5000
 - Make sure the backend is running
 - `npm start`
 
-## [Backend repo](https://github.com/felipeog/fcc-social-media-backend)
+## Preview
+
+[![Captura-de-Tela-2020-12-29-a-s-01-20-08.png](https://i.postimg.cc/wMSnWhv6/Captura-de-Tela-2020-12-29-a-s-01-20-08.png)](https://postimg.cc/n9Gdr9B5)
+
+## Backend repo
+
+https://github.com/felipeog/fcc-social-media-backend
