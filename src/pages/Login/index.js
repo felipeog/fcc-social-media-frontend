@@ -69,7 +69,7 @@ const Login = ({ history }) => {
 
         <ReCAPTCHAWrapper>
           <ReCAPTCHA
-            sitekey={process.env.RECAPTCHA_KEY}
+            sitekey={process.env.RECAPTCHA_SITE_KEY}
             ref={recaptchaRef}
             hl="en"
           />

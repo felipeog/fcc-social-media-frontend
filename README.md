@@ -35,7 +35,7 @@ Simple social media app using **MongoDB**, **Express**, **React**, **Node** and 
 - Create a `.env` file:
 
 ```
-RECAPTCHA_KEY=[recaptcha-site-key]
+RECAPTCHA_SITE_KEY=[recaptcha-site-key]
 ```
 
 - Make sure that the backend is running on `http://localhost:5000`
