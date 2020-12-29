@@ -1,5 +1,5 @@
 import { createHttpLink } from '@apollo/client'
 
-export default createHttpLink({
-  uri: 'http://localhost:5000',
-})
+const uri = process.env.BACKEND_URI || 'http://localhost:5000'
+
+export default createHttpLink({ uri })
