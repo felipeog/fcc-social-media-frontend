@@ -36,9 +36,10 @@ Simple social media app using **MongoDB**, **Express**, **React**, **Node** and 
 
 ```
 RECAPTCHA_SITE_KEY=[recaptcha-site-key]
+BACKEND_URI=[optional-backend-uri] # defaults to http://localhost:5000
 ```
 
-- Make sure that the backend is running on `http://localhost:5000`
+- Make sure the backend is running
 - `npm start`
 
 ## [Backend repo](https://github.com/felipeog/fcc-social-media-backend)
