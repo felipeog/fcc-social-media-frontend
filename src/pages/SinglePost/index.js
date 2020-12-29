@@ -26,7 +26,7 @@ const SinglePost = ({
   })
 
   // functions
-  const onDeleteCallback = () => {
+  const onPostDelete = () => {
     history.push('/')
   }
 
@@ -42,7 +42,7 @@ const SinglePost = ({
 
     return (
       <>
-        <PostCard post={post} onDeleteCallback={onDeleteCallback} />
+        <PostCard post={post} onPostDelete={onPostDelete} />
         <CommentsList title="Comments" post={{ id, comments }} />
       </>
     )
