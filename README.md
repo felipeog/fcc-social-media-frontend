@@ -19,6 +19,7 @@ Simple social media app using **MongoDB**, **Express**, **React**, **Node** and 
     "mobx-react-lite": "^3.1.6",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
+    "react-google-recaptcha": "^2.1.0",
     "react-router-dom": "^5.2.0",
     "react-toastify": "^6.2.0",
     "semantic-ui-css": "^2.4.1",
