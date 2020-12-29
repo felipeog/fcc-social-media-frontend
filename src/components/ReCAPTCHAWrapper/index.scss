@@ -1,0 +1,18 @@
+.ReCAPTCHAWrapper {
+  min-height: 78px;
+  margin: 20px 0;
+  position: relative;
+  z-index: 10;
+
+  .loader-wrapper {
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    width: 304px;
+    height: 78px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
