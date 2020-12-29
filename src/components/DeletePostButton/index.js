@@ -14,7 +14,7 @@ const DeletePostButton = ({ post, onPostDelete }) => {
   const user = UserStore.getUser
 
   // hooks
-  const { deletePost, loading, error } = useDeletePost({
+  const { deletePost, loading } = useDeletePost({
     onDelete: () => {
       toggleConfirm()
       onPostDelete?.()
