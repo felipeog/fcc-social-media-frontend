@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useQuery, useMutation } from '@apollo/client'
 import { Loader } from 'semantic-ui-react'
 import { observer } from 'mobx-react-lite'
@@ -9,7 +9,7 @@ import UserStore from '../../stores/UserStore'
 
 import { POSTS_QUERY, CREATE_POST_MUTATION } from './query'
 
-const Home = () => {
+const Home = ({ location }) => {
   // queries
   const {
     data: postsData,
@@ -18,7 +18,6 @@ const Home = () => {
     fetchMore: postsFetchMore,
     refetch: postsRefetch,
   } = useQuery(POSTS_QUERY, {
-    fetchPolicy: 'network-only',
     onError: (err) => console.error('Home @ useQuery >>>>>', err),
   })
 
@@ -27,12 +26,19 @@ const Home = () => {
     createPost,
     { loading: createPostLoading, error: createPostError },
   ] = useMutation(CREATE_POST_MUTATION, {
-    onCompleted: postsRefetch,
+    onCompleted: () => postsRefetch({ page: 1 }),
     onError: (err) => {
       console.error('Home @ createPost >>>>>', err)
       setErrors(err.graphQLErrors[0]?.extensions?.errors || {})
     },
   })
+
+  // effects
+  useEffect(() => {
+    if (location.state?.refetch) {
+      postsRefetch({ page: 1 })
+    }
+  }, [location])
 
   // functions
   const loadMore = () => {
@@ -42,16 +48,6 @@ const Home = () => {
     postsFetchMore({
       variables: {
         page: nextPage,
-      },
-      updateQuery: (prev, { fetchMoreResult }) => {
-        if (!fetchMoreResult) return prev
-
-        return {
-          getPosts: {
-            ...fetchMoreResult.getPosts,
-            posts: [...prev.getPosts.posts, ...fetchMoreResult.getPosts.posts],
-          },
-        }
       },
     }).catch((err) => console.error('Home @ loadMore >>>>>', err))
   }

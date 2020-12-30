@@ -27,7 +27,10 @@ const SinglePost = ({
 
   // functions
   const onPostDelete = () => {
-    history.push('/')
+    history.push({
+      pathname: '/home',
+      state: { refetch: true },
+    })
   }
 
   // rendering

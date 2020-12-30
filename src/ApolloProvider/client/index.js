@@ -11,7 +11,22 @@ export default new ApolloClient({
       Query: {
         fields: {
           getPosts: {
-            merge: mergeIncoming,
+            keyArgs: false,
+            merge: (
+              existing = { posts: [] },
+              incoming = { posts: [] },
+              { args }
+            ) => {
+              console.log({ args })
+              if (!args?.page || args.page === 1) {
+                return incoming
+              }
+
+              return {
+                ...incoming,
+                posts: [...existing.posts, ...incoming.posts],
+              }
+            },
           },
         },
       },
