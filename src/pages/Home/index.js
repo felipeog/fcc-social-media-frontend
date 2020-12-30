@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { useQuery, useMutation } from '@apollo/client'
 import { Loader } from 'semantic-ui-react'
 import { observer } from 'mobx-react-lite'
@@ -9,15 +9,17 @@ import UserStore from '../../stores/UserStore'
 
 import { POSTS_QUERY, CREATE_POST_MUTATION } from './query'
 
-const Home = ({ location }) => {
+const Home = () => {
   // queries
   const {
     data: postsData,
     loading: postsLoading,
     error: postsError,
     fetchMore: postsFetchMore,
-    refetch: postsRefetch,
   } = useQuery(POSTS_QUERY, {
+    variables: {
+      page: 1,
+    },
     onError: (err) => console.error('Home @ useQuery >>>>>', err),
   })
 
@@ -26,19 +28,28 @@ const Home = ({ location }) => {
     createPost,
     { loading: createPostLoading, error: createPostError },
   ] = useMutation(CREATE_POST_MUTATION, {
-    onCompleted: () => postsRefetch({ page: 1 }),
-    onError: (err) => {
-      console.error('Home @ createPost >>>>>', err)
-      setErrors(err.graphQLErrors[0]?.extensions?.errors || {})
-    },
-  })
+    update: (cache, { data }) => {
+      const newPost = data?.createPost
+      const prevData = cache.readQuery({
+        query: POSTS_QUERY,
+      })
 
-  // effects
-  useEffect(() => {
-    if (location.state?.refetch) {
-      postsRefetch({ page: 1 })
-    }
-  }, [location])
+      if (newPost && prevData) {
+        const newData = {
+          getPosts: {
+            ...prevData?.getPosts,
+            posts: [newPost, ...prevData?.getPosts?.posts],
+          },
+        }
+
+        cache.writeQuery({
+          query: POSTS_QUERY,
+          data: newData,
+        })
+      }
+    },
+    onError: (err) => console.error('Home @ createPost >>>>>', err),
+  })
 
   // functions
   const loadMore = () => {
@@ -50,10 +61,6 @@ const Home = ({ location }) => {
         page: nextPage,
       },
     }).catch((err) => console.error('Home @ loadMore >>>>>', err))
-  }
-
-  const onPostDelete = () => {
-    postsRefetch()
   }
 
   // rendering
@@ -78,7 +85,6 @@ const Home = ({ location }) => {
           title="Recent posts"
           posts={posts}
           pagination={{ loadMore, hasNextPage }}
-          onPostDelete={onPostDelete}
         />
       </>
     )
