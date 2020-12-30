@@ -17,7 +17,6 @@ export default new ApolloClient({
               incoming = { posts: [] },
               { args }
             ) => {
-              console.log({ args })
               if (!args?.page || args.page === 1) {
                 return incoming
               }
