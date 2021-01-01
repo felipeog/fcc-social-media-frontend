@@ -26,8 +26,11 @@ const SinglePost = ({
   })
 
   // functions
-  const onDeleteCallback = () => {
-    history.push('/')
+  const onPostDelete = () => {
+    history.push({
+      pathname: '/home',
+      state: { refetch: true },
+    })
   }
 
   // rendering
@@ -42,7 +45,7 @@ const SinglePost = ({
 
     return (
       <>
-        <PostCard post={post} onDeleteCallback={onDeleteCallback} />
+        <PostCard post={post} onPostDelete={onPostDelete} />
         <CommentsList title="Comments" post={{ id, comments }} />
       </>
     )

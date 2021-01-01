@@ -13,7 +13,7 @@ dayjs.extend(relativeTime)
 
 const PostCard = ({
   post: { body, commentCount, createdAt, id, likeCount, likes, username },
-  onDeleteCallback,
+  onPostDelete,
 }) => {
   // rendering
   return (
@@ -37,7 +37,7 @@ const PostCard = ({
           <CommentPostButton post={{ id, commentCount }} />
         </div>
 
-        <DeletePostButton post={{ id, username }} callback={onDeleteCallback} />
+        <DeletePostButton post={{ id, username }} onPostDelete={onPostDelete} />
       </Card.Content>
     </Card>
   )

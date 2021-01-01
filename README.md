@@ -16,7 +16,7 @@ https://fcc-social-media.netlify.app
 
 ```
 RECAPTCHA_SITE_KEY=[recaptcha-site-key]
-BACKEND_URI=[optional-backend-uri] # defaults to http://localhost:5000
+BACKEND_URI=[optional-backend-uri] # defaults to http://localhost:5000/graphql
 ```
 
 - Make sure the backend is running
